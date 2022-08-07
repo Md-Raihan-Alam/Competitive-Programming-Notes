@@ -2,6 +2,31 @@
 using namespace std;
 void prefixSum(){
     //from tutorial (bootcamp)
+    int n,q;
+    cin>>n>>q;
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    long long pf[n+1];
+    pf[0]=a[0];
+    for(int i=1;i<n;i++)
+    {
+        pf[i]=pf[i-1]+a[i];
+    }
+    while(q--){
+        int l,r;
+        long long sum=0;
+        if(l==1)
+        {
+            sum=pf[r-1];
+        }
+        else {
+            sum=pf[r-1]-pf[l-2];
+        }
+        cout<<sum<<endl;
+    }
 }
 int main()
 {
@@ -35,9 +60,12 @@ int main()
         // cout<<pf[r]<<" "<<pf[l-1]<<endl;
         // cout<<pf[r-1]<<endl;
         //cout<<pf[]
-        if(l==1){
+        if(l==r)
             cout<<pf[r-1]<<endl;
-        }else{
+        // else if(l==1){
+        //     cout<<pf[r-1]<<endl;
+        // }
+        else{
             cout<<pf[r-1]-pf[l-2]<<endl;
         }
     }
