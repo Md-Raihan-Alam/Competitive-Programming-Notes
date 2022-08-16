@@ -2,20 +2,6 @@
 using namespace std;
 #define N 101
 int arr[N][N],I[N][N];
-void mul(int ar[][N],int B[][N],int dim)
-{
-    int res[dim+1][dim+1];
-        for(int i=0;i<dim;i++)
-            for(int j=0;j<dim;j++)
-                {
-                    res[i][j]=0;
-                    for(int k=0;k<dim;k++)
-                        res[i][j]+=ar[i][k]*B[k][j];
-                }
-    for(int i=0;i<dim;i++)
-        for(int j=0;j<dim;j++)
-            arr[i][j]=res[i][j];
-}
 void printArr(int arr[][N],int dim)
 {
     for(int i=0;i<dim;i++)
@@ -25,6 +11,20 @@ void printArr(int arr[][N],int dim)
         cout<<endl;
     }
 }
+void mul(int A[][N],int B[][N],int dim)
+{
+    int res[dim+1][dim+1];
+        for(int i=0;i<dim;i++)
+            for(int j=0;j<dim;j++)
+                {
+                    res[i][j]=0;
+                    for(int k=0;k<dim;k++)
+                        res[i][j]+=A[i][k]*B[k][j];
+                }
+    for(int i=0;i<dim;i++)
+        for(int j=0;j<dim;j++)
+            A[i][j]=res[i][j];
+}
 void matrixExp(int arr[][N],int dim,int n)
 {
     for(int i=0;i<dim;i++)
@@ -33,8 +33,21 @@ void matrixExp(int arr[][N],int dim,int n)
                 if(i==j) I[i][j]=1;
                 else    I[i][j]=0;
             }
-    for(int i=0;i<n;i++)
-        mul(I,arr,dim);
+    //Naive approach O(n^3)
+    // for(int i=0;i<n;i++)
+    //     mul(I,arr,dim);
+    //Binary Exponentitation O(logN)
+    while(n)
+    {
+        if(n%2){
+            mul(I,arr,dim);
+            n--;
+        }
+        else{
+            mul(arr,arr,dim);
+            n/=2;
+        }
+    }
     for(int i=0;i<dim;i++)
         for(int j=0;j<dim;j++)
             arr[i][j]=I[i][j];        
