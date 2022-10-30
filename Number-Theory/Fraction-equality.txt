@@ -1,0 +1,13 @@
+Assume we have four number a,b,c,d. Check whether a|b==c|d and if not then how many steps you need to make them equal assuming one step is multiply numerator or denominator of any integer
+of our choice
+we always can make fractions equal in two operations: Multiply first fraction's enumerator by bc, the first fraction is equal to abc/b=ac, Multiply second fraction's 
+enumerator by ad, the second fraction is equal to acd/d=ac.
+
+That means that the answer does not exceed 2.
+
+If fractions are equal from input, the answer is 0. Otherwise, it can't be 0.
+
+Now we have to check if the answer is 1. Let's assume that for making fractions equal in 1 operation we have to multiply first fraction's enumerator by x. 
+Then ax/b=cd must be true. From this we can see that x=bc/ad. x must be integer, so bc must be divisible by ad. If we assume that we multiplied first fraction's denumerator by x,
+ we can do the same calculations and see that ad must be divisible by bc. So, for checking if the answer is 1 we need to check if one of ad and bc is divisible by another one. 
+If we multiply second fraction's enumerator or denumerator by x we will get the same conditions for answer being equla to 1.

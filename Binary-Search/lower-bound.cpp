@@ -7,7 +7,8 @@ int main()
 {
 	// Input vector
 	std::vector<int> v{ 10, 20, 30, 30, 30, 40, 50 };
-
+        // returns an iterator pointing to the first element in the range [first, last) that is greater than or equal value, 
+        // or last if no such element is found.
 	// Print vector
 	std::cout << "Vector contains :";
 	for (unsigned int i = 0; i < v.size(); i++)

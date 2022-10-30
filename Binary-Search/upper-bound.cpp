@@ -6,7 +6,8 @@
 int main()
 {
 	std::vector<int> v{ 10, 20, 30, 40, 50 };
-
+        // returns an iterator pointing to the first element in the range [first, last) that is greater than value, 
+        // or last if no such element is found.
 	// Print vector
 	std::cout << "Vector contains :";
 	for (int i = 0; i < v.size(); i++)
@@ -17,7 +18,7 @@ int main()
 
 	// std :: upper_bound
 	upper1 = std::upper_bound(v.begin(), v.end(), 35);
-	upper2 = std::upper_bound(v.begin(), v.end(), 45);
+	upper2 = std::upper_bound(v.begin(), v.end(), 40);
 
 	std::cout << "\nupper_bound for element 35 is at position : "
 			<< (upper1 - v.begin());
