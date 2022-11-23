@@ -1,21 +1,28 @@
 #include<iostream>
 #include<vector>
 using namespace std;
+#define MAX 10000007
 //sieve of erestosthenese
+vector<bool> is_prime(10000007,0);
 vector<int> primes;
-bool arr[90000001];
-void sieve(){
-    long long maxN=90000000;
-    arr[0]=arr[1]=true;
-    for(long long i=2;i*i<=maxN;i++){
-        if(arr[i]==false){
-            for(long long j=i*i;j<=maxN;j+=i){
-                arr[j]=true;
+void sieve(int n)
+{
+    for(int i=3;i<=n;i+=2)  is_prime[i]=1;
+    for(int i=3;i*i<=n;i+=2)
+    {
+        if(is_prime[i]==1)
+        {
+            for(int j=i*i;j<=n;j+=i)
+            {
+                is_prime[j]=0;
             }
         }
     }
-    for(long long i=2;i<=maxN;i++){
-        if(!arr[i])
+    is_prime[2]=1;
+    primes.push_back(2);
+    for(int i=3;i<=n;i+=2)
+    {
+        if(is_prime[i])
             primes.push_back(i);
     }
 }
@@ -24,7 +31,7 @@ int main()
 {
     long long q,n;
     cin>>q;
-    sieve();
+    sieve(MAX);
     while(q--){
         cin>>n;
         cout<<primes[n-1]<<endl;

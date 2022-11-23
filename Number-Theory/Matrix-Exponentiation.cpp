@@ -33,9 +33,6 @@ void matrixExp(int arr[][N],int dim,int n)
                 if(i==j) I[i][j]=1;
                 else    I[i][j]=0;
             }
-    //Naive approach O(n^3)
-    // for(int i=0;i<n;i++)
-    //     mul(I,arr,dim);
     //Binary Exponentitation O(logN)
     while(n)
     {
