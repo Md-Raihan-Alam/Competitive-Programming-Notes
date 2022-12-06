@@ -28,6 +28,20 @@ signed main()
         graph[v1][v2]=weight;
         graph[v2][v1]=weight;
     }
+    //check data
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int a,b;
+        cin>>a>>b;
+        if(graph[a][b]!=0)
+        {
+            cout<<"Connected and edge wieght is "<<graph[a][b]<<endl;
+        }else{
+            cout<<"Not Connected"<<endl;
+        }
+    }
     return 0;
 }
 // 6 9

@@ -22,15 +22,24 @@ signed main()
         graph[v1].push_back({v2,weight});
         graph[v2].push_back({v1,weight});
     }
+    //check data
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int a,b;
+        cin>>a>>b;
+        bool found=false;
+        for(int i=0;i<graph[a].size();i++)
+        {
+            if(b==graph[a][i].first)
+            {
+                cout<<"Connected weight is "<<graph[a][i].second<<endl;
+                found=true;
+            }
+        }
+        if(!found)
+            cout<<"Not connected"<<endl;
+    }
     return 0;
 }
-// 6 9
-// 1 3 4
-// 1 5 3
-// 3 5 2
-// 3 4 7
-// 3 6 8
-// 3 2 9
-// 2 6 1
-// 4 6 2
-// 5 6 3

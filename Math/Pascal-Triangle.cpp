@@ -4,7 +4,7 @@ int main()
 {
     int n;
     cin>>n;
-    for(int i=1;i<=n;i++){
+    for(int i=1;i<=n+1;i++){
         int num=1;
         for(int space=n-i;space>0;space--){
             cout<<" ";
