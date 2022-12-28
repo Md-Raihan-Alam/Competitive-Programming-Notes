@@ -52,7 +52,9 @@ signed main()
     {
         for(int vertext:ccc)
         {
-            cout<<vertext<<endl;
+            cout<<vertext<<" ";
         }
+        cout<<endl;
     }
+    return 0;
 }

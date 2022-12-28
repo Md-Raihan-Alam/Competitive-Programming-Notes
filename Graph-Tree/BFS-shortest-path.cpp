@@ -1,79 +1,76 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define int long long
-#define endl "\n"
-const int INF=1e9;
-vector<vector<int>> vis(8,vector<int> (8));
-vector<vector<int>> level(8,vector<int>(8));
-int getx(string s)
+vector<int> g[10000];
+vector<int> v(10000,0);
+vector<int> d(10000,0);
+vector<int> p(10000,-1);
+void bfs(int i)
 {
-    return s[0]-'a';
-}
-int gety(string s)
-{
-    return s[1]-'1';
-}
-bool isValid(int x,int y)
-{
-    return x>=0 && y>=0 && x<8 && y<8;
-}
-vector<pair<int,int>> movements={
-    {-1,2},{1,2},
-    {-1,-2},{1,-2},
-    {2,-1},{2,1},
-    {-2,-1},{-2,1},
-};
-int bfs(string source, string dest)
-{
-   int sourceX=getx(source);
-   int sourceY=gety(source);
-   int destX=getx(dest);
-   int destY=gety(dest);
-   queue<pair<int,int>> q;
-    q.push({sourceX,sourceY});
-    vis[sourceX][sourceY]=1;
-    level[sourceX][sourceY]=0;
-   while(!q.empty())
-   {
-    pair<int,int> v=q.front();
-    int x=v.first;
-    int y=v.second;
-    q.pop();
-    for(auto movement:movements)
+    queue<int> q;
+    q.push(i);
+    v[i]=1;
+    while(!q.empty())
     {
-        int childX=movement.first+x;
-        int childY=movement.second+y;
-        if(!isValid(childX,childY)) continue;
-        if(!vis[childX][childY])
+        int f=q.front();
+        q.pop();
+        for(auto x:g[f])
         {
-            q.push({childX,childY});
-            level[childX][childY]=level[x][y]+1;
-            vis[childX][childY]=1;
-        }
-    }
-   }
-   return level[destX][destY];
-}
-void reset()
-{
-    for(int i=0;i<8;i++)
-    {
-        for(int j=0;j<8;j++){
-            level[i][j]=0;
-            vis[i][j]=0;
+            if(!v[x])
+            {
+                q.push(x);
+                v[x]=1;
+                d[x]=d[f]+1;
+                //for path, from where did you came
+                p[x]=f;
+            }
         }
     }
 }
-signed main()
+int main()
 {
     int n;
     cin>>n;
+    int m;
+    cin>>m;
+    for(int i=0;i<m;i++)
+    {
+        int x,y;
+        cin>>x>>y;
+        g[x].push_back(y);
+        g[y].push_back(x);
+    }
+    bfs(0);
+    int mx=0;
     for(int i=0;i<n;i++)
     {
-        reset();
-        string s1,s2;
-        cin>>s1>>s2;
-        cout<<bfs(s1,s2)<<endl;
+        cout<<d[i]<<" ";
+        mx=max(mx,d[i]);
+    }
+    cout<<endl;
+    int dest=5;
+    if(v[dest]==0)
+    {
+        cout<<"NO path"<<endl;
+    }else{
+        vector<int> path;
+        int x=dest;
+        while(x!=-1)
+        {
+            path.push_back(x);
+            x=p[x];
+        }
+        reverse(path.begin(),path.end());
+        for(int i=0;i<path.size();i++)
+            cout<<path[i]<<" ";
+        cout<<endl;
     }
     return 0;
 }
+// 6
+// 6
+// 0 1
+// 0 2
+// 0 3
+// 2 4
+// 2 5
+// 3 5

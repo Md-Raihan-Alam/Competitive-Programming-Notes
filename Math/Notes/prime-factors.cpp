@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
-#define int long long
-#define endl "\n";
 using namespace std;
+#define int long long
+#define endl "\n"
 vector<int> factorize(int n)
 {
     vector<int> ans;
@@ -68,15 +68,16 @@ vector<int> factorizeFaster(int n)
 }
 signed main()
 {
-    long long l;
-    cin>>l;
-    vector<int> factors=factorize(l);
-    vector<int> factorsFast=factorizeFaster(l);
-    for(int i=0;i<factors.size();i++)
-        cout<<factors[i]<<" ";
-    cout<<endl;
-    for(int j=1;j<factorsFast.size();j++)
-        cout<<factorsFast[j]<<" ";
-    cout<<endl;
+    //1 is not consider prime number, so start from 1 index
+    //every n number can at most have one prime factor greater than sqrt(n)
+    //If we after dividing out some prime factor, calculate the square root of the remaining number we
+// can use that square root as upper limit for factor. If factor exceeds this square root
+// we know the remaining number is prime.
+
+  int x;
+  cin>>x;
+  vector<int> ans=factorizeFaster(x);
+  for(int i=1;i<ans.size();i++)
+    cout<<ans[i]<<" ";
     return 0;
 }
