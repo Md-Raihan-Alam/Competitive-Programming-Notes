@@ -58,12 +58,8 @@ vector<int> factorizeFaster(int n)
         }
         factor+=2;
     }
-    if(n==1)
-    {
-        ans.push_back(factor);
-    }else{
+    if(n>1)
         ans.push_back(n);
-    }
     return ans;
 }
 signed main()
@@ -75,7 +71,7 @@ signed main()
     for(int i=0;i<factors.size();i++)
         cout<<factors[i]<<" ";
     cout<<endl;
-    for(int j=1;j<factorsFast.size();j++)
+    for(int j=0;j<factorsFast.size();j++)
         cout<<factorsFast[j]<<" ";
     cout<<endl;
     return 0;

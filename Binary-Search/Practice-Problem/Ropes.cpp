@@ -23,7 +23,8 @@ signed main()
         cin>>v[i];
     double l=0;//good double
     double r=1e8;//r is bad
-    for(int i=0;i<100;i++)
+    // for(int i=0;i<100;i++)
+    while(r-l>1e-6)
     {
         double m=(l+r)/2;
         if(good(m))

@@ -14,9 +14,9 @@ signed main()
     cout.tie(nullptr);
     cin>>w>>h>>n;
     int l=0;//l is bad
-    int r=1;//r is good
-    while(!good(r))
-        r<<=2;
+    int r=1e9;//r is good
+    // while(!good(r))
+    //     r<<=2;
     while(r>l+1)
     {
         int m=(l+r)/2;

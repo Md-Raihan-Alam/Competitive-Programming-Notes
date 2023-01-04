@@ -7,7 +7,7 @@ const int N=1e5+10;
 #define int long long
 #define endl "\n"
 vector<int> dp(N,-1);
-//usually - factorial, exponenetiation, bitmask etc
+//usually - factorial, exponenetiation, bitmask etc->O(n)
 int fib(int n)
 {
     if(n==0)
