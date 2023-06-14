@@ -13,6 +13,8 @@ bool dfs(int vertext,int par)
         if(visited[child] && child==par) continue;
         if(visited[child]) return true;
         isLoppExits |= dfs(child,vertext);
+        if(isLoppExits)
+            return true;
     }
     return isLoppExits;
 }

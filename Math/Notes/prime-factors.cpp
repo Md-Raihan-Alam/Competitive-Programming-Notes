@@ -58,10 +58,7 @@ vector<int> factorizeFaster(int n)
         }
         factor+=2;
     }
-    if(n==1)
-    {
-        ans.push_back(factor);
-    }else{
+    if(n>1){
         ans.push_back(n);
     }
     return ans;
@@ -77,7 +74,11 @@ signed main()
   int x;
   cin>>x;
   vector<int> ans=factorizeFaster(x);
-  for(int i=1;i<ans.size();i++)
+  vector<int> ans2=factorize(x);
+  for(int i=0;i<ans.size();i++)
     cout<<ans[i]<<" ";
+    cout<<endl;
+    for(int i=0;i<ans2.size();i++)
+        cout<<ans2[i]<<" ";
     return 0;
 }

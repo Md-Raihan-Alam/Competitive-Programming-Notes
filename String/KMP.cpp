@@ -2,52 +2,51 @@
 using namespace std;
 #define int long long
 #define endl "\n"
-//returns the longest proper prefix array of pattern p
-//where lps[i]=longest proper prefix which also suffic of p[0...i]
-vector<int> build_lps(string p)
-{
-    int sz=p.size();
-    vector<int> lps;
-    lps.assign(sz+1,0);
-    int j=0;
-    lps[0]=0;
-    for(int i=1;i<sz;i++)
-    {
-        while(j>0 && p[i]!=p[j])
-        {
-            if(j>=1)
-                j=lps[j-1];
-            else
-                j=-1;
-        }
-        j++;
-        lps[i]=j;
-    }
-    return lps;
-}
-//return matche in vector ans in 0 indexed
 vector<int> ans;
-void kmp(vector<int> lps,string s,string p)
-{
-    int psz=p.size(),sz=s.size();
-    int j=0;
-    for(int i=0;i<sz;i++)
-    {
-        while(j>=0 && p[j]!=s[i])
-        {
-            if(j>=1)
-                j=lps[j-1];
-            else
-                j=-1;
+void KMP(string text, string pattern) {
+    int n = text.length();
+    int m = pattern.length();
+
+    int lps[m];
+    lps[0] = 0;
+
+    int j = 0;
+    for (int i = 1; i < m;) {
+        if (pattern[i] == pattern[j]) {
+            lps[i] = j + 1;
+            i++;
+            j++;
+        } else {
+            if (j != 0) {
+                j = lps[j - 1];
+            } else {
+                lps[i] = 0;
+                i++;
+            }
         }
-        j++;
-        if(j==psz)
-        {
-            j=lps[j-1];
-            //pattern found in string s at position i-psz+1
-            ans.push_back(i-psz+1);
+    }
+
+    int i = 0;
+    j = 0;
+    while (i < n) {
+        if (text[i] == pattern[j]) {
+            i++;
+            j++;
         }
-        //after each loop we have j=longest common suffx of s[0...i] which is also prefix of p
+
+        if (j == m) {
+            cout << "Pattern found at index " << i - j << endl;
+            ans.push_back(i-j);
+            j = lps[j - 1];
+        }
+
+        else if (i < n && pattern[j] != text[i]) {
+            if (j != 0) {
+                j = lps[j - 1];
+            } else {
+                i++;
+            }
+        }
     }
 }
 signed main()
@@ -65,11 +64,9 @@ signed main()
         string p;
         cin>>s;
         cin>>p;
-        vector<int> lps=build_lps(p);
-        kmp(lps,s,p);
+        KMP(s,p);
         for(auto x:ans)
-            cout<<"pattern found at index "<<x<<endl;
-        cout<<endl;
+            cout<<x<<endl;
     }
     return 0;
 }

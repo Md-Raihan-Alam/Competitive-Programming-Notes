@@ -1,5 +1,25 @@
 #include<bits/stdc++.h>
 using namespace std;
+int binary_search_index(vector<int> v,int search)
+{
+    int l=0;
+    int r=v.size()-1;
+    while(r>=l)
+    {
+        int m=(l+r)/2;
+        if(v[m]==search)
+        {
+            return m;
+        }else if(v[m]<search)
+        {
+            l=m+1;
+        }else if(v[m]>search)
+        {
+            r=m-1;
+        }
+    }
+    return -1;
+}
 int main()
 {
     int n,k;

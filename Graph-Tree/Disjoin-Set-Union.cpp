@@ -50,5 +50,6 @@ signed main()
         if(fi(i)==i)
             connected_ct++;
     }
+    cout<<connected_ct<<endl;
     return 0;
 }

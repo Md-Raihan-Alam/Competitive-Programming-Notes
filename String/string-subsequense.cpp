@@ -1,28 +1,43 @@
-//time complexity=O(n*2^n)
-#include<iostream>
-#include<string>
+#include<bits/stdc++.h>
 using namespace std;
-void printSubSeq(string str,int n,int index=-1,string curr="")
-{
-    if(index==n)
-        return;
-    if(!curr.empty())
-    {
-        cout<<curr<<endl;
-    }
-    for(int i=index+1;i<n;i++)
-    {
-        curr+=str[i];
-        printSubSeq(str,n,i,curr);
-        //backtracking
-        curr=curr.erase(curr.size()-1);
-    }
-    return ;
+//time complexity - O(n)
+string print(string s , int i){
+	int j = 0;
+	string sub;
+	
+	//finding where the bit is set
+	while(i>0){
+		if(i & 1){
+			sub.push_back(s[j]); //pushing only when bit is set
+		}
+		j++; //always incrementing the index pointer
+		i = i >> 1;
+	}
+	
+	return sub;
 }
-int main()
-{
-    string str;
-    cin>>str;
-    printSubSeq(str,str.size());
-    return 0;
+
+vector<string> createsubsets(string& s){
+	
+	vector <string> res;
+	for(int i = 1 ; i <= ((1 << s.size()) - 1) ; i++){
+		//each time we create a subsequence for corresponding binary representation
+		res.push_back(print(s,i));
+	}
+	return res;
+}
+
+int main(){
+	string s = "001000";
+	//vector of strings to store all sub-sequences
+	vector <string> print = createsubsets(s);
+	
+	//print function
+	for(int i = 0 ; i < print.size() ; i++){
+		for (int j = 0; j < print[i].size(); j++){
+			cout << print[i][j]<<" ";
+		}
+		cout << endl;
+	}
+	return 0;
 }
